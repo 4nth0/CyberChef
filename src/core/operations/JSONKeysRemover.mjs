@@ -54,7 +54,16 @@ class JSONKeysRemover extends Operation {
         }
 
         keys.forEach(key => {
-            delete output[key];
+            if (key.endsWith("*")) {
+                const prefix = key.slice(0, -1);
+                Object.keys(output).forEach(k => {
+                    if (k.startsWith(prefix)) {
+                        delete output[k];
+                    }
+                });
+            } else {
+                delete output[key];
+            }
         });
 
         return JSON.stringify(output);
