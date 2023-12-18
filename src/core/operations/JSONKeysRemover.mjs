@@ -45,8 +45,8 @@ class JSONKeysRemover extends Operation {
         if (!input) return "";
         const [keysRawList] = args;
 
-        const keys = keysRawList.split(",").map(key => key.trim())
-        let output
+        const keys = keysRawList.split(",").map(key => key.trim());
+        let output;
         try {
             output = JSON5.parse(input);
         } catch (err) {
@@ -54,7 +54,7 @@ class JSONKeysRemover extends Operation {
         }
 
         keys.forEach(key => {
-            delete output[key]
+            delete output[key];
         });
 
         return JSON.stringify(output);
